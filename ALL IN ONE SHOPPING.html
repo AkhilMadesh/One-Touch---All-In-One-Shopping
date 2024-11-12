@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>One Touch - Indian Shopping</title>
+  <style>
+    /* Body background and font setup */
+body {
+  font-family: 'Arial', sans-serif;
+  color: rgb(186, 142, 31);
+  background-color: #0e0d0d;
+}
+
+/* Header styling with gold and black borders */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px,30px;
+ background-color: rgb(17, 16, 16);
+  color: rgb(167, 149, 45);
+  border-bottom: 4px solid rgb(159, 141, 41);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  
+
+}
+
+header .logo {
+  display: flex;
+  align-items: center;
+  font-size: 2.5em;
+  font-weight: bold;
+  color: goldenrod;
+  border: 3px solid rgb(160, 124, 34);
+  padding: 10px;
+  border-radius: 25px;
+  font-family: 'cooper',sans-serif;
+}
+
+header .logo img {
+  width: 300px;
+  height:120px;
+  margin-right: 8px;
+}
+
+header .search-bar {
+  padding: 8px;
+  font-size: 1em;
+  width: 35%;
+  border: 1px solid goldenrod;
+  border-radius: 5px;
+  background-color: #333;
+  color: goldenrod;
+}
+
+header .user-profile a {
+  color: goldenrod;
+  text-decoration: none;
+  font-size: 1.5em;
+}
+
+/* Filter bar styling */
+.filter-bar {
+  display: flex;
+  justify-content: center;
+  padding: 10px 0;
+  background-color: black;
+  border-top: 2px solid goldenrod;
+  border-bottom: 2px solid goldenrod;
+}
+
+.filter-btn {
+  padding: 10px 20px;
+  margin: 0 5px;
+  background-color: black;
+  color: goldenrod;
+  border: 1px solid goldenrod;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.filter-btn:hover {
+  background-color: goldenrod;
+  color: rgb(248, 237, 237);
+}
+
+/* Logo grid item styling */
+.logo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+.logo-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  color: black;
+  background-color: goldenrod;
+  padding: 15px;
+  border: 3px solid black;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s, background-color 0.2s;
+}
+
+.logo-item:hover {
+  transform: scale(1.05);
+  background-color: rgb(247, 238, 238);
+  color: goldenrod;
+}
+
+.logo-item img {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  border: 2px solid goldenrod;
+  border-radius: 5px;
+}
+
+.logo-item p {
+  margin-top: 10px;
+  font-size: 1em;
+}
+
+/* Footer styling */
+footer {
+  text-align: center;
+  background-color: black;
+  color: goldenrod;
+  border-top: 4px solid goldenrod;
+  
+}
+
+footer a {
+  color: goldenrod;
+  text-decoration: none;
+  font-weight: bold; 
+  margin: 15px;
+}
+
+/* Login Overlay styling with gold and black accents */
+.login-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  justify-content: center;
+  align-items: center;
+}
+
+.login-content {
+  background: goldenrod;
+  padding: 20px;
+  width: 300px;
+  border: 2px solid black;
+  border-radius: 10px;
+  text-align: center;
+  color: #0e0d0d;
+}
+.close-btn {
+  position:relative;
+  top: -15px;
+  right: -150px;
+  font-size: 1.5em;
+  cursor: pointer;
+}
+
+.login-content input {
+  display: block;
+  width: 90%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid black;
+  border-radius: 5px;
+  background-color: black;
+  color: goldenrod;
+}
+
+.login-content button {
+  padding: 10px 20px;
+  background-color: black;
+  color: goldenrod;
+  border: 1px solid goldenrod;
+  border-radius: 5px;
+  cursor: pointer;
+}
+#loginMessage {
+  margin-top: 10px;
+  font-size: 0.9em;
+}
+/* Active filter button styling */
+.filter-btn.active {
+  background-color: goldenrod;
+  color: black;
+}
+
+
+  </style>
+<body>
+
+  <!-- Header Section -->
+  <header>
+    <div class="logo">
+      <img src="https://i.pinimg.com/736x/17/c7/30/17c73026825b03db9a95ff862799e499--logo-design-inspiration-custom-logos.jpg" alt="One Touch Logo"> <!-- Logo Image -->
+      <span>One Touch</span>
+    </div>
+    <input type="text" class="search-bar" placeholder="Search stores...">
+    <div class="user-profile">
+      <a href="#" onclick="toggleLogin()">Login</a>
+    </div>
+  </header>
+
+  <!-- Main Content Section -->
+  <main>
+    <section class="filter-bar">
+      <button class="filter-btn">All</button>
+      <button class="filter-btn">Fashion</button>
+      <button class="filter-btn">Electronics</button>
+      <button class="filter-btn">Groceries</button>
+      <!-- Add more categories as needed -->
+    </section>
+    <section class="logo-grid">
+      
+        <!-- Fashion category -->
+      <a href="https://www.myntra.com" target="_blank" class="logo-item fashion">
+        <img src="https://www.thestatesman.com/wp-content/uploads/2021/11/myntra.png" alt="Myntra">
+        <p>Myntra</p>
+      </a>
+      <a href="https://www.ajio.com" target="_blank" class="logo-item fashion">
+        <img src="https://media.glassdoor.com/sqll/1321544/ajio-squarelogo-1533010680533.png" alt="Ajio">
+        <p>Ajio</p>
+      </a>
+      <a href="https://www.nykaa.com" target="_blank" class="logo-item">
+        <img src="https://tse3.mm.bing.net/th/id/OIP.y4wpbP49uIp3vXrCivnJfgAAAA?rs=1&pid=ImgDetMain" alt="Nykaa">
+        <p>Nykaa</p>
+      </a>
+      <a href="https://www.tatacliq.com" target="_blank" class="logo-item">
+        <img src="https://infobeamsolution.com/wp-content/uploads/2022/07/tata-cliq.png" alt="Tata Cliq">
+        <p>Tata Cliq</p>
+      </a>
+      
+
+      <!-- Electronics category -->
+      <a href="https://www.flipkart.com" target="_blank" class="logo-item electronics">
+        <img src="https://logos-world.net/wp-content/uploads/2020/11/Flipkart-Logo.png" alt="Flipkart">
+        <p>Flipkart</p>
+      </a>
+      <a href="https://www.amazon.in" target="_blank" class="logo-item electronics">
+        <img src="https://tse3.mm.bing.net/th/id/OIP.WGxtnw81X7exO2PxiVlL9QHaEK?rs=1&pid=ImgDetMain" alt="Amazon">
+        <p>Amazon</p>
+      </a>
+      <a href="https://www.snapdeal.com" target="_blank" class="logo-item">
+        <img src="https://th.bing.com/th/id/R.0153150d38f50dfac17c644bce4ae0e1?rik=VVVmt4F%2f15ugKA&riu=http%3a%2f%2fpixr8.com%2fwp-content%2fuploads%2f2016%2f09%2fsnapdeal-e1473654023267-1170x480.png&ehk=m3honspdFsvoMC5icfIBtO0nlO7YgjGr49khsKMDxQ4%3d&risl=&pid=ImgRaw&r=0" alt="Snapdeal">
+        <p>Snapdeal</p>
+      </a>
+      <a href="https://paytmmall.com" target="_blank" class="logo-item">
+        <img src="https://tse3.mm.bing.net/th/id/OIP.VVN--B-bfFUYLKogBkzcsQAAAA?rs=1&pid=ImgDetMain" alt="Paytm Mall">
+        <p>Paytm Mall</p>
+      </a>
+
+      <!-- Groceries category -->
+      <a href="https://www.bigbasket.com" target="_blank" class="logo-item groceries">
+        <img src="https://gumlet.assettype.com/afaqs/2021-11/c9b6e415-726d-4f0b-a787-c3eff949e722/bb_Daily_with_TATA_Logo.jpg?auto=format%2Ccompress&w=1200" alt="BigBasket">
+        <p>BigBasket</p>
+      </a>
+      <a href="https://www.grofers.com" target="_blank" class="logo-item groceries">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/Grofers-Logo-orange.png/1200px-Grofers-Logo-orange.png" alt="Grofers">
+        <p>Grofers</p>
+      </a>
+    
+
+    </section>
+  </main>
+
+<footer>
+    <p>&copy; 2024 One Touch - All Rights Reserved</p>
+    <a href="About.html">About Us</a>
+    <a href="Contact.html">Contact Us</a>
+</footer>
+
+  <!-- Footer Section -->
+  <footer>
+    <div class="footer-links">
+      <a href="About.html">About Us</a>
+      <a href="Contact.html">Contact</a>
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms of Service</a>
+    </div>
+  </footer>
+  <!-- Login Overlay Section -->
+<div class="login-overlay" id="loginOverlay">
+    <div class="login-content">
+      <span class="close-btn" onclick="toggleLogin()">×</span>
+      <h2>Login</h2>
+      <input type="text" id="username" placeholder="Username">
+      <input type="password" id="password" placeholder="Password">
+      <button onclick="submitLogin()">Login</button>
+      <p id="loginMessage"></p> <!-- Message display for feedback -->
+    </div>
+  </div>
+  
+  
+  <script>
+    //  Toggle login overlay
+function toggleLogin() {
+  const loginOverlay = document.getElementById("loginOverlay");
+  loginOverlay.style.display = loginOverlay.style.display === "flex" ? "none" : "flex";
+}
+
+// Search bar filtering
+const searchBar = document.querySelector(".search-bar");
+searchBar.addEventListener("input", () => {
+  const query = searchBar.value.toLowerCase();
+  const items = document.querySelectorAll(".logo-item");
+  items.forEach(item => {
+    const title = item.querySelector("p").textContent.toLowerCase();
+    item.style.display = title.includes(query) ? "block" : "none";
+  });
+});
+
+// Category filter
+const filterButtons = document.querySelectorAll(".filter-btn");
+filterButtons.forEach(button => {
+  button.addEventListener("click", () => {
+    const category = button.textContent.toLowerCase();
+    const items = document.querySelectorAll(".logo-item");
+
+    items.forEach(item => {
+      if (category === "all" || item.classList.contains(category)) {
+        item.style.display = "block";
+      } else {
+        item.style.display = "none";
+      }
+    });
+  });
+});
+// Highlight the active filter button
+document.querySelectorAll('.filter-btn').forEach(button => {
+  button.addEventListener('click', function() {
+    document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+    button.classList.add('active');
+  });
+});
+
+// Function to validate and handle login submission
+function submitLogin() {
+  const username = document.getElementById("username").value;
+  const password = document.getElementById("password").value;
+  const loginMessage = document.getElementById("loginMessage");
+
+  // Basic validation 
+   if (username === "" || password === "") {
+    loginMessage.textContent = "Please enter both username and password.";
+    loginMessage.style.color = "red";
+  } else if (username === "user" && password === "password") { // Example credentials
+    loginMessage.textContent = "Login successful!";
+    loginMessage.style.color = "green";
+    setTimeout(() => {
+      toggleLogin(); // Close overlay after a delay
+      loginMessage.textContent = ""; // Clear message
+      document.getElementById("username").value = ""; // Clear fields
+      document.getElementById("password").value = "";
+    }, 1000);
+  } else {
+    loginMessage.textContent = "Invalid credentials. Please try again.";
+    loginMessage.style.color = "red";
+  }
+}
+     </script>
+  
+  
+
+</body>
+</html>
