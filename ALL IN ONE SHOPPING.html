@@ -214,6 +214,7 @@ footer a {
     </div>
     <input type="text" class="search-bar" placeholder="Search stores...">
     <div class="user-profile">
+      <a href="#" onclick="toggleRegister()">Register</a>&emsp;
       <a href="#" onclick="toggleLogin()">Login</a>
     </div>
   </header>
@@ -296,14 +297,29 @@ footer a {
     </div>
   </footer>
   <!-- Login Overlay Section -->
-<div class="login-overlay" id="loginOverlay">
+  <div class="login-overlay" id="loginOverlay">
     <div class="login-content">
       <span class="close-btn" onclick="toggleLogin()">×</span>
       <h2>Login</h2>
-      <input type="text" id="username" placeholder="Username">
-      <input type="password" id="password" placeholder="Password">
+      <input type="text" id="username" placeholder="Username" required>
+      <input type="password" id="password" placeholder="Password" required>
       <button onclick="submitLogin()">Login</button>
       <p id="loginMessage"></p> <!-- Message display for feedback -->
+      <a onclick="toggleLogin(), toggleRegister()">Registeration</a>
+    </div>
+  </div>
+  <div class="login-overlay" id="registerOverlay">
+    <div class="login-content">
+      <span class="close-btn" onclick="toggleRegister()">×</span>
+      <h2>Register</h2>
+      <input type="text" id="un" placeholder="Username" required>
+      <input type="mail" id="em" placeholder="Email" required>
+      <input type="password" id="ps" placeholder="Password" required>
+      <input type="password" id="ps2" placeholder="Confirm Password" required> 
+
+      <button onclick="submitRegister()">Register</button>
+      <p id="registerMessage"></p> <!-- Message display for feedback -->
+      <a onclick="toggleLogin(), toggleRegister()">Login</a>
     </div>
   </div>
   
@@ -313,6 +329,11 @@ footer a {
 function toggleLogin() {
   const loginOverlay = document.getElementById("loginOverlay");
   loginOverlay.style.display = loginOverlay.style.display === "flex" ? "none" : "flex";
+}
+
+function toggleRegister() {
+  const registerOverlay = document.getElementById("registerOverlay");
+  registerOverlay.style.display = registerOverlay.style.display === "flex" ? "none" : "flex";
 }
 
 // Search bar filtering
@@ -368,6 +389,30 @@ function submitLogin() {
       loginMessage.textContent = ""; // Clear message
       document.getElementById("username").value = ""; // Clear fields
       document.getElementById("password").value = "";
+    }, 1000);
+  } else {
+    loginMessage.textContent = "Invalid credentials. Please try again.";
+    loginMessage.style.color = "red";
+  }
+}
+
+function submitRegister() {
+  const username = document.getElementById("un").value;
+  const password = document.getElementById("ps").value;
+  const loginMessage = document.getElementById("registerMessage");
+
+  // Basic validation 
+   if (username === "" || password === "") {
+    loginMessage.textContent = "Please enter all the credentials.";
+    loginMessage.style.color = "red";
+  } else if (username === "user" && password === "password") { // Example credentials
+    loginMessage.textContent = "Login successful!";
+    loginMessage.style.color = "green";
+    setTimeout(() => {
+      toggleLogin(); // Close overlay after a delay
+      loginMessage.textContent = ""; // Clear message
+      document.getElementById("un").value = ""; // Clear fields
+      document.getElementById("ps").value = "";
     }, 1000);
   } else {
     loginMessage.textContent = "Invalid credentials. Please try again.";
